@@ -1,0 +1,27 @@
+{
+  "name": "nursery-thermometer",
+  "version": "1.0.0",
+  "description": "Uses a raspberrypi to turn the temperature into led colour",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r1ch/nursery-thermometer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r1ch/nursery-thermometer/issues"
+  },
+  "homepage": "https://github.com/r1ch/nursery-thermometer#readme",
+  "dependencies": {
+    "onoff": "^3.1.0",
+    "python-shell": "^0.5.0",
+    "rambda": "^1.1.5"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
