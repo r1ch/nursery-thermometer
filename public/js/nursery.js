@@ -10,7 +10,9 @@ angular.module('nurseryApp', [])
 			$scope.error = failure
 		})
 	}
+
 	getTemperature();
+
 	var startColourSlider = (slider)=>{
 		$http.get('/api/colours')
 		.then(
@@ -55,6 +57,10 @@ angular.module('nurseryApp', [])
 		},
 		(failure)=>{
 		})
+	}
+
+	$scope.setMode = (mode)=>{
+		$http.post('/api/'+mode,{})
 	}
 
         var colourSlider = document.getElementById('colour');

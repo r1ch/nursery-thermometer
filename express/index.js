@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'))
 
-const port = 8080
+const port = 80
 
 const router = express.Router();
 
@@ -42,6 +42,15 @@ router.post('/brightness', function(req, res) {
     res.status(201).end()
 });
 
+router.post('/nightlight', function(req, res) {
+   Colours.setMode('nightlight')
+   res.status(201).end()
+});
+
+router.post('/thermometer', function(req, res) {
+   Colours.setMode('thermometer')
+   res.status(201).end()
+});
 
 app.use('/api', router);
 
