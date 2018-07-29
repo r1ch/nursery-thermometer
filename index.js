@@ -1,12 +1,12 @@
 const Environment = require('./environment')
 const Lights = require('./lights')
-const Helpers = require('./helpers')
+const Colours = require('./colours')
 const Interface = require('./express')
 
-const setColour = (reading) => Lights.colour = Helpers.temperatureToColour(reading.temperature)
+const setColour = (reading) => Lights.colour = Colours.temperatureToColour(reading.temperature)
 const updateLighthouse = () => Environment.newReading().then(setColour)
 
 
-Interface(Environment,Lights)
+Interface(Environment,Lights,Colours)
 
 setInterval(updateLighthouse,1000)
