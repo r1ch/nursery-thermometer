@@ -9,7 +9,6 @@ class Lights extends EventEmitter {
 		this._triple = [128,128,128];
 		this._brightness =  0.5;
 		this.on('change',()=>{
-			console.log(this.state);
 			run(SOLID,this.state);
 		});
 

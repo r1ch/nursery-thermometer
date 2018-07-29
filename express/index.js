@@ -46,9 +46,5 @@ router.post('/brightness', function(req, res) {
 app.use('/api', router);
 
 app.listen(port);
-console.log('API is up');
-
-
-
 
 module.exports = setup

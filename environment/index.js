@@ -12,7 +12,7 @@ const newReading = () =>run(SCRIPT,{},(data)=>{
 	return latestReading;
 })
 
-const getReading = () => latestReading || newReading();
+const getReading = () => latestReading;
 
 module.exports = {
 	newReading:newReading,

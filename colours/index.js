@@ -11,7 +11,6 @@ let colours = defaultColours;
 const setup = async ()=>{
 	await storage.init()
 	let storedColours = await storage.getItem('colours');
-	console.log("Recovered",storedColours)
 	if(!storedColours || storedColours[0] === null) {
 		await storage.setItem('colours',defaultColours)
 		storedColours = defaultColours
