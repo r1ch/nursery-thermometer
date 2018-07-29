@@ -1,7 +1,12 @@
 const Environment = require('./environment')
-const Button = require('./button')
-var reading = Environment()
-var button = new Button()
+const Lights = require('./lights')
+const Helpers = require('./helpers')
+const Interface = require('./express')
 
-reading.then(console.log)
-button.on('press',console.log)
+const setColour = (reading) => Lights.colour = Helpers.temperatureToColour(reading.temperature)
+const updateLighthouse = () => Environment.newReading().then(setColour)
+
+
+Interface(Environment,Lights)
+
+setInterval(updateLighthouse,1000)
