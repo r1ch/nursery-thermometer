@@ -1,6 +1,8 @@
 const express    = require('express');
 const app        = express();
 const bodyParser = require('body-parser');
+const port = 80
+
 
 let Environment
 let Lights
@@ -16,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'))
 
-const port = 80
 
 const router = express.Router();
 

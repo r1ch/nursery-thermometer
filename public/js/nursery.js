@@ -4,7 +4,16 @@ angular.module('nurseryApp', [])
 		$http.get('/api/environment')
 		.then(
 		(success)=>{
-			$scope.temperature = parseInt(success.data.temperature)
+			$scope.temperature = Number(success.data.temperature).toFixed(1)
+			if($scope.colours){
+				if($scope.temperature<$scope.colours[0].from){
+					$scope.temperatureClass='light-blue'
+				} else if ($scope.temperature<$scope.colours[1].from){
+					$scope.temperatureClass='green'
+				} else {
+					$scope.temperatureClass='red'
+				}
+			}
 		},
 		(failure)=>{
 			$scope.error = failure
@@ -67,7 +76,7 @@ angular.module('nurseryApp', [])
 	var brightnessSlider = document.getElementById('brightness');
 	startColourSlider(colourSlider);
 	startBrightnessSlider(brightnessSlider);
-	$interval(()=>getTemperature,2000);
+	$interval(getTemperature,2000);
   });
 
 const makeSlider = (slider,startMin,startMax)=>{
@@ -81,7 +90,7 @@ const makeSlider = (slider,startMin,startMax)=>{
      'max': 40
    },
    format: wNumb({
-     decimals: 0
+     decimals: 1
    })
   });
 }

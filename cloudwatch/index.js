@@ -6,11 +6,12 @@ const cloudWatchPut = (reading)=>{
     return new Promise((resolve,reject)=>{
         let params = {
             MetricData: [{
-                MetricName: 'temperature',
+            },{
+                MetricName: 'light',
                 StorageResolution: 60,
                 Timestamp: new Date(),
-                Value: reading.temperature
-            }],
+                Value: reading.light
+	    }],
             Namespace: 'lighthouse'
         };
         cloudWatch.putMetricData(params, function(err, data) {
