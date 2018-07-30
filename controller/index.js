@@ -71,7 +71,7 @@ class Controller extends EventEmitter {
 	}
 
 	get colours(){
-		return this._colours[this._mode]
+		return this._colours.thermometer
 	}
 
 	set colours(colours){

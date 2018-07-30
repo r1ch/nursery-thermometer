@@ -6,12 +6,14 @@ angular.module('nurseryApp', [])
 		(success)=>{
 			$scope.temperature = Number(success.data.temperature).toFixed(1)
 			if($scope.colours){
-				if($scope.temperature<$scope.colours[0].from){
-					$scope.temperatureClass='light-blue'
+				if($scope.mode=='nightlight'){
+					$scope.temperatureClass='grey';
+				} else if($scope.temperature<$scope.colours[0].from){
+					$scope.temperatureClass='light-blue';
 				} else if ($scope.temperature<$scope.colours[1].from){
-					$scope.temperatureClass='green'
+					$scope.temperatureClass='green';
 				} else {
-					$scope.temperatureClass='red'
+					$scope.temperatureClass='red';
 				}
 			}
 		},

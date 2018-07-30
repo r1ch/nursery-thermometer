@@ -19,11 +19,11 @@
         <div class="col s12 m6">
           <div class="card center-align" ng-class="temperatureClass">
             <div class="card-content white-text">
-              <span class="card-title"><h1>{{temperature}}</h1></span>
+              <span class="card-title"><h1>{{temperature}}<sup>&deg;</sup></h1></span>
             </div>
             <div class="card-action">
-              <a href="#" ng-click = "setMode('thermometer')" class="btn" ng-class = "{'btn-flat' : mode=='thermometer'}">Thermometer</a>
-              <a href="#" ng-click = "setMode('nightlight')" class="btn" ng-class = "{'btn-flat' : mode=='nightlight'}">Nightlight</a>
+              <a href="#" ng-click = "setMode('thermometer')" class="waves-effect btn" ng-class = "{disabled : mode=='thermometer'}">Thermometer</a>
+              <a href="#" ng-click = "setMode('nightlight')" class="waves-effect btn" ng-class = "{disabled : mode=='nightlight'}">Nightlight</a>
             </div>
           </div>
         </div>
