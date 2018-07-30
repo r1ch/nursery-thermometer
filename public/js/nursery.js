@@ -20,8 +20,6 @@ angular.module('nurseryApp', [])
 		})
 	}
 
-	getTemperature();
-
 	var startColourSlider = (slider)=>{
 		$http.get('/api/colours')
 		.then(
@@ -68,15 +66,58 @@ angular.module('nurseryApp', [])
 		})
 	}
 
+	var startMode = ()=>{
+		$http.get('/api/mode')
+		.then(
+		(success)=>{
+			$scope.mode = success.data
+		},
+		(error)=>{
+			$scope.error = error
+		})
+	}
+
 	$scope.setMode = (mode)=>{
-		$http.post('/api/'+mode,{})
+		$http.post('/api/mode',{mode:mode})
+		.then(
+		(success)=>{
+			$scope.mode=mode
+		},
+		(error)=>{
+		})
+	}
+
+	var startAuto = ()=>{
+		$http.get('/api/auto')
+		.then(
+		(success)=>{
+			$scope.auto = success.data
+			console.log($scope.auto)
+		},
+		(error)=>{
+			$scope.error = error
+		})
+	}
+
+	$scope.setAuto = ()=>{
+		$http.post('/api/auto',{auto:$scope.auto})
+		.then(
+		(success)=>{
+		},
+		(error)=>{
+			$scope.error = error
+		})
 	}
 
         var colourSlider = document.getElementById('colour');
 	var brightnessSlider = document.getElementById('brightness');
 	startColourSlider(colourSlider);
 	startBrightnessSlider(brightnessSlider);
+	startMode()
+	startAuto()
+	getTemperature();
 	$interval(getTemperature,2000);
+
   });
 
 const makeSlider = (slider,startMin,startMax)=>{

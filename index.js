@@ -1,14 +1,15 @@
 const Environment = require('./environment')
 const Lights = require('./lights')
-const Colours = require('./colours')
+const Controller = require('./controller')
 const Interface = require('./express')
 const CloudWatch = require('./cloudwatch')
 
-const setColour = (reading) => Lights.colour = Colours.temperatureToColour(reading.temperature)
-const updateLighthouse = () => Environment.newReading().then(setColour)
-const updateCloudWatch = () => CloudWatch.record(Environment.getReading())
+const updateLighthouse = () => Lights.colour = Controller.temperatureToColour(Environment.temperature)
+const updateCloudWatch = () => CloudWatch.record(Environment)
+const updateBrightness = () => Lights.working = Controller.workingFor(Environment.light)
 
-Interface(Environment,Lights,Colours)
+Interface(Environment,Lights,Controller)
 
 setInterval(updateLighthouse,1000)
+setInterval(updateBrightness,5000)
 setInterval(updateCloudWatch,60000)

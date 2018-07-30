@@ -1,21 +1,41 @@
 const run=require('../run')
 const SCRIPT = "scripts/all.py";
+const EVERY = 1000;
 
-let latestReading;
 
-const newReading = () =>run(SCRIPT,{},(data)=>{
-	latestReading = {
-		temperature : data[0],
-		pressure : data[1],
-		light: data[2]
+class Environment {
+
+	constructor(){
+		this._reading = null
+		this.ID = Date.now()+Math.random();
+		this.read();
+		this.interval = setInterval(()=>this.read(),EVERY)
 	}
-	return latestReading;
-})
 
-const getReading = () => latestReading;
+	read(){
+		run(SCRIPT,{},(data)=>{
+			this._reading = {
+				temperature : parseFloat(data[0]),
+				pressure : parseFloat(data[1]),
+				light: parseFloat(data[2])
+			}
+		});
+	}
 
-module.exports = {
-	newReading:newReading,
-	getReading:getReading
+	get reading(){
+		return this._reading
+	}
+
+	get temperature(){
+		return this._reading.temperature
+	}
+
+	get light(){
+		return this._reading.light
+	}
+
 }
 
+const instance = new Environment();
+
+module.exports = instance

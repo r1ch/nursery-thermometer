@@ -6,12 +6,12 @@ const port = 80
 
 let Environment
 let Lights
-let Colours
+let Controller
 
-const setup = (environment,lights,colours) => {
+const setup = (environment,lights,controller) => {
 	Environment = environment;
 	Lights = lights;
-	Colours = colours
+	Controller = controller;
 }
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,35 +22,43 @@ app.use(express.static('public'))
 const router = express.Router();
 
 router.get('/environment', function(req, res) {
-    res.json(Environment.getReading());
+    res.json(Environment.reading);
 });
 
 router.get('/colours', function(req, res) {
-    res.json(Colours.getColours());
+    res.json(Controller.colours);
 });
 
 router.post('/colours', function(req, res) {
-    Colours.setColours(req.body)
+    Controller.colours = req.body
     res.status(201).end()
 });
 
+router.get('/auto', function(req, res) {
+    res.json(!!Controller.auto);
+});
+
+router.post('/auto', function(req, res) {
+    Controller.auto = req.body.auto
+    res.status(201).end()
+});
+
+router.get('/mode', function(req, res) {
+    res.json(Controller.mode);
+});
+
+router.post('/mode', function(req, res) {
+   Controller.mode = req.body.mode
+   res.status(201).end()
+});
+
 router.get('/brightness', function(req, res) {
-    res.json(Lights.state[3]);
+    res.json(Lights.brightness);
 });
 
 router.post('/brightness', function(req, res) {
     Lights.brightness = req.body.brightness
     res.status(201).end()
-});
-
-router.post('/nightlight', function(req, res) {
-   Colours.setMode('nightlight')
-   res.status(201).end()
-});
-
-router.post('/thermometer', function(req, res) {
-   Colours.setMode('thermometer')
-   res.status(201).end()
 });
 
 app.use('/api', router);

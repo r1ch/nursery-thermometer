@@ -22,8 +22,8 @@
               <span class="card-title"><h1>{{temperature}}</h1></span>
             </div>
             <div class="card-action">
-              <a href="#" ng-click = "setMode('thermometer')">Thermometer</a>
-              <a href="#" ng-click = "setMode('nightlight')">Nightlight</a>
+              <a href="#" ng-click = "setMode('thermometer')" class="btn" ng-class = "{'btn-flat' : mode=='thermometer'}">Thermometer</a>
+              <a href="#" ng-click = "setMode('nightlight')" class="btn" ng-class = "{'btn-flat' : mode=='nightlight'}">Nightlight</a>
             </div>
           </div>
         </div>
@@ -39,6 +39,12 @@
       <div class="row">
         <div class="col s12 m6">
          Brightness
+        <p>
+        <label>
+          <input type="checkbox" ng-model = "auto" ng-change = "setAuto()"/>
+          <span>Auto</span>
+          </label>
+        </p>
          <p class="range-field">
            <input type="range" id="brightness" min="0" max="100" ng-model = "brightness" ng-change = "setBrightnessSlider()" ng-model-options="{ debounce: 100 }"/>
          </p>

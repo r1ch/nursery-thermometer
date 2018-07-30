@@ -11,7 +11,7 @@ class Lights extends EventEmitter {
 		this.on('change',()=>{
 			run(SOLID,this.state);
 		});
-
+		this._working = true;
 	}
 
 	set colour(triple){
@@ -21,6 +21,10 @@ class Lights extends EventEmitter {
 		}
 	}
 
+	get colour(){
+		return this._triple
+	}
+
 	set brightness(brightness){
 		if(brightness != this._brightness){
 			this._brightness = brightness
@@ -28,9 +32,33 @@ class Lights extends EventEmitter {
 		}
 	}
 
-	get state() {
-		return [... this._triple, this._brightness]
+	get brightness(){
+		return this._brightness
 	}
+
+	set state(state){
+		let brightness = state.pop();
+		let triple = state;
+		if(brightness != this._brightness || triple != this._triple){
+			this._brightness = brightness
+			this._triple = triple
+			this.emit('change')
+		}
+	}
+
+	get state() {
+		return [... this._triple, this._brightness*this._working]
+	}
+
+	set working(working){
+		this._working = working;
+		this.emit('change')
+	}
+
+	get working(){
+		return this._working;
+	}
+
 }
 
 
