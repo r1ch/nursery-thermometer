@@ -36,8 +36,8 @@ angular.module('nurseryApp', [])
 	}
 
 	var setColourSlider = (event)=>{
-		$scope.colours[0].from = parseInt(event[1])
-		$scope.colours[1].from = parseInt(event[2])
+		$scope.colours[0].from = parseInt(event[0])
+		$scope.colours[1].from = parseInt(event[1])
 		$http.post('/api/colours',$scope.colours)
 		.then(
 		(success)=>{
@@ -142,8 +142,8 @@ angular.module('nurseryApp', [])
 
 const makeSlider = (slider,startMin,startMax)=>{
   noUiSlider.create(slider, {
-   start: [10, startMin, startMax, 40],
-   connect: true,
+   start: [startMin, startMax],
+   connect: [true, true, true],
    step: 1,
    orientation: 'horizontal', // 'horizontal' or 'vertical'
    range: {
@@ -156,14 +156,8 @@ const makeSlider = (slider,startMin,startMax)=>{
   });
 
  var segments = slider.querySelectorAll('.noUi-connect')
- segments[0].style.background = 'rgb(0,0,255)'
- segments[1].style.background = 'rgb(0,255,0)'
- segments[2].style.background = 'rgb(255,0,0)'
- var origins = slider.getElementsByClassName('noUi-origin');
- origins[0].setAttribute('disabled', true);
- origins[3].setAttribute('disabled', true);
- var handles = slider.getElementsByClassName('noUi-handle');
- handles[0].style.display = 'none'
- handles[3].style.display = 'none'
+ segments[0].style.background = 'rgb(32,32,200)'
+ segments[1].style.background = 'rgb(32,200,32)'
+ segments[2].style.background = 'rgb(200,32,32)'
 }
 
