@@ -11,7 +11,7 @@ const nightlightColours = [
 	{rgb:[255,214,170]}
 ]
 
-const DARK = 400;
+const DARK = 300;
 
 
 class Controller extends EventEmitter {
