@@ -61,6 +61,10 @@ router.post('/brightness', function(req, res) {
     res.status(201).end()
 });
 
+router.get('/state', function(req, res) {
+    res.json(Lights.state);
+});
+
 app.use('/api', router);
 
 app.listen(port);

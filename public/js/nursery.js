@@ -36,8 +36,8 @@ angular.module('nurseryApp', [])
 	}
 
 	var setColourSlider = (event)=>{
-		$scope.colours[0].from = parseInt(event[0])
-		$scope.colours[1].from = parseInt(event[1])
+		$scope.colours[0].from = parseInt(event[1])
+		$scope.colours[1].from = parseInt(event[2])
 		$http.post('/api/colours',$scope.colours)
 		.then(
 		(success)=>{
@@ -111,20 +111,38 @@ angular.module('nurseryApp', [])
 		})
 	}
 
+	var getState = ()=>{
+		$http.get('/api/state')
+		.then(
+		(success)=>{
+			$scope.state = {
+				r : success.data[0],
+				g : success.data[1],
+				b : success.data[2],
+				brightness : success.data[3]
+			}
+		},
+		(error)=>{
+			$scope.error = error
+		})
+	}
+
         var colourSlider = document.getElementById('colour');
 	var brightnessSlider = document.getElementById('brightness');
 	startColourSlider(colourSlider);
 	startBrightnessSlider(brightnessSlider);
-	startMode()
-	startAuto()
+	startMode();
+	startAuto();
 	getTemperature();
+	getState();
 	$interval(getTemperature,2000);
+	$interval(getState,2000)
 
   });
 
 const makeSlider = (slider,startMin,startMax)=>{
   noUiSlider.create(slider, {
-   start: [startMin, startMax],
+   start: [10, startMin, startMax, 40],
    connect: true,
    step: 1,
    orientation: 'horizontal', // 'horizontal' or 'vertical'
@@ -136,4 +154,16 @@ const makeSlider = (slider,startMin,startMax)=>{
      decimals: 1
    })
   });
+
+ var segments = slider.querySelectorAll('.noUi-connect')
+ segments[0].style.background = 'rgb(0,0,255)'
+ segments[1].style.background = 'rgb(0,255,0)'
+ segments[2].style.background = 'rgb(255,0,0)'
+ var origins = slider.getElementsByClassName('noUi-origin');
+ origins[0].setAttribute('disabled', true);
+ origins[3].setAttribute('disabled', true);
+ var handles = slider.getElementsByClassName('noUi-handle');
+ handles[0].style.display = 'none'
+ handles[3].style.display = 'none'
 }
+

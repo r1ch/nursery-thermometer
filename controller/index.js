@@ -32,7 +32,6 @@ class Controller extends EventEmitter {
 	async load(){
 		await storage.init()
 		this._stored = await storage.getItem('state');
-		console.log(this._stored)
 		if(!this._stored || !this._stored.colours) {
 			await storage.setItem('state',{
 				auto: false,
@@ -48,7 +47,6 @@ class Controller extends EventEmitter {
 		this._stored.colours = this._colours.thermometer
 		this._stored.auto = this._auto
 		await storage.setItem('state',this._stored)
-		console.log(this._stored)
 	}
 
 	temperatureToColour(temperature){
