@@ -1,65 +1,79 @@
 <!DOCTYPE html>
-  <html ng-app = "nurseryApp">
-    <head>
-      <title>Nursery Controller</title>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="css/nouislider.css"  media="screen,projection"/>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<html ng-app="nurseryApp">
+<head>
+	<title>Nursery Controller</title><!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--Import materialize.css-->
+	<link href="css/materialize.min.css" media="screen,projection" rel="stylesheet" type="text/css">
+	<link href="css/nouislider.css" media="screen,projection" rel="stylesheet" type="text/css"><!--Let browser know website is optimized for mobile-->
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+</head>
 
-    <body ng-controller="NurseryController as nursery">
-    <div class = "container">
-     <!--HEADER-->
-      <div class="row">
-        <div class="col s12">
-          <div class="card center-align white">
-            <div class="card-content black-text">
-              <span class="card-title"><h1>{{temperature}}<sup>&deg;</sup></h1></span>
-	      <a class = "btn-floating btn-fab" ng-class = "{disabled:state.brightness==0}" style = "background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">lightbulb_outline</i></a>
-	    </div>
-            <div class="card-action">
-              <a href="#" ng-click = "setMode('thermometer')" class="waves-effect btn" ng-class = "{'btn-flat' : mode!='thermometer'}">Thermometer</a>
-              <a href="#" ng-click = "setMode('nightlight')" class="waves-effect btn" ng-class = "{'btn-flat' : mode!='nightlight'}">Nightlight</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--COLOUR SLIDER-->
-      <div class="row">
-        <div class="col s12">
-          Colour range<br><br>
-          <div id="colour"></div>
-        </div>
-     </div>
-      <!--BRIGHTNESS SLIDER-->
-      <div class="row valign">
-        <div class="col s2">
-	<p>
-        <label>
-          <input type="checkbox" ng-model = "auto" ng-change = "setAuto()"/>
-          <span>Auto</span>
-          </label>
-        </p>
+<body ng-controller="NurseryController as nursery">
+	<div class="container">
+		<!--HEADER-->
+
+
+		<div class="row">
+			<div class="col s12">
+				<div class="card center-align white">
+					<div class="card-content black-text">
+						<span class="card-title"></span>
+
+						<h1><span class="card-title">{{temperature}}<sup>&deg;</sup></span>
+						</h1>
+						<a class="btn-floating btn-fab" ng-class="{disabled:state.brightness==0}" style="background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">lightbulb_outline</i></a>
+					</div>
+
+
+					<div class="card-action">
+						<a class="waves-effect btn" href="#" ng-class="{'btn-flat' : mode!='thermometer'}" ng-click="setMode('thermometer')">Thermometer</a> <a class="waves-effect btn" href="#" ng-class="{'btn-flat' : mode!='nightlight'}" ng-click="setMode('nightlight')">Nightlight</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--COLOUR SLIDER-->
+
+
+		<div class="row">
+			<div class="col s12">
+				Colour range<br>
+				<br>
+
+
+				<div id="colour">
+				</div>
+			</div>
+		</div>
+		<!--BRIGHTNESS SLIDER-->
+
+
+		<div class="row valign">
+			<div class="col s2">
+				<p><label><input ng-change="setAuto()" ng-model="auto" type="checkbox"> <span>Auto</span></label>
+				</p>
+			</div>
+
+
+			<div class="col s8">
+				<p ng-if=" true || state.brightness == 0 && brightness != 0">AUTO OFF</p>
+			</div>
+
+
+			<div class="col s8">
+				<p class="range-field"><input id="brightness" max="100" min="0" ng-change="setBrightnessSlider()" ng-model="brightness" ng-model-options="{ debounce: 100 }" type="range">
+				</p>
+			</div>
+		</div>
 	</div>
-        <div class = "col s8">
-        <p ng-if=" true  ||  state.brightness == 0 && brightness != 0">AUTO OFF</p>
-        </div>
-	<div class = "col s8"> 
-	 <p class="range-field">
-           <input type="range" id="brightness" min="0" max="100" ng-model = "brightness" ng-change = "setBrightnessSlider()" ng-model-options="{ debounce: 100 }"/>
-         </p>
-        </div>
-      </div>
-      </div>
-      <!--JavaScript at end of body for optimized loading-->
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-      <script type="text/javascript" src="js/nouislider.min.js"></script>
-      <script src="js/nursery.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-    </body>
-  </html>
+	<!--JavaScript at end of body for optimized loading-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js">
+	</script> 
+	<script src="js/nouislider.min.js" type="text/javascript">
+	</script> 
+	<script src="js/nursery.js">
+	</script> 
+	<script src="js/materialize.min.js" type="text/javascript">
+	</script>
+</body>
+</html>
