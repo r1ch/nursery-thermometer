@@ -16,13 +16,10 @@
 
 		<div class="row">
 			<div class="col s12">
-				<div class="card center-align white">
+				<div class="card center-align grey lighten-3">
 					<div class="card-content black-text">
-						<span class="card-title"></span>
-
-						<h1><span class="card-title">{{temperature}}<sup>&deg;</sup></span>
-						</h1>
-						<a class="btn-floating btn-fab" ng-class="{disabled:state.brightness==0}" style="background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">lightbulb_outline</i></a>
+						<span class="card-title"><h1>{{temperature}}<sup>&deg;</sup></h1></span>
+						<a class="btn-floating btn-fab btn-large" ng-class="{disabled:state.brightness==0}" style="background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">lightbulb_outline</i></a>
 					</div>
 
 
@@ -33,35 +30,29 @@
 			</div>
 		</div>
 		<!--COLOUR SLIDER-->
-
-
-		<div class="row">
-			<div class="col s12">
-				Colour range<br>
-				<br>
-
-
-				<div id="colour">
-				</div>
+		<div class="row valign-wrapper">
+			<div class="col s2"><i class="material-icons">looks</i></div>
+			<div class="col s10">
+				<div id="colour"></div>
 			</div>
 		</div>
 		<!--BRIGHTNESS SLIDER-->
-
-
-		<div class="row valign">
-			<div class="col s2">
-				<p><label><input ng-change="setAuto()" ng-model="auto" type="checkbox"> <span>Auto</span></label>
+		<div class="row valign-wrapper">
+			<div class="col s2"><i class="material-icons">wb_incandescent</i></div>
+			<div class="col s7">
+				<p class="range-field">
+					<label>
+						<input id="brightness" max="100" min="0" ng-change="setBrightnessSlider()" ng-model="brightness" ng-model-options="{ debounce: 100 }" type="range">
+					</label>
 				</p>
+				
 			</div>
-
-
-			<div class="col s8">
-				<p ng-if=" true || state.brightness == 0 && brightness != 0">AUTO OFF</p>
-			</div>
-
-
-			<div class="col s8">
-				<p class="range-field"><input id="brightness" max="100" min="0" ng-change="setBrightnessSlider()" ng-model="brightness" ng-model-options="{ debounce: 100 }" type="range">
+			<div class="col s3 right-align">
+				<p>
+				<label>
+					<input ng-change="setAuto()" ng-model="auto" type="checkbox">
+					<span><small>Auto</small></span>
+				</label>
 				</p>
 			</div>
 		</div>
