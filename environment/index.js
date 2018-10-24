@@ -15,7 +15,7 @@ class Environment {
 	read(){
 		run(SCRIPT,{},(data)=>{
 			this._reading = {
-				temperature : parseFloat(data[0]),
+				temperature : parseFloat(data[0])-1.2,
 				pressure : parseFloat(data[1]),
 				light: parseFloat(data[2])
 			}

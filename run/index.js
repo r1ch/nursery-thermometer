@@ -9,6 +9,7 @@ const run = (script,args,resolver) => new Promise((resolve,reject)=>{
 				let answer = fn(data);
 				resolve(answer);
 			} catch(error) {
+    				console.error("Run hit an issue",error)
 				reject(error);
 			}
                 }

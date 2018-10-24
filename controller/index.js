@@ -8,7 +8,7 @@ const defaultColours = [
 ]
 
 const nightlightColours = [
-	{rgb:[255,214,170]}
+	{rgb:[188,188,50]}
 ]
 
 const DARK = 300;

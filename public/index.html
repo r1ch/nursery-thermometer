@@ -19,7 +19,7 @@
 				<div class="card center-align grey lighten-3">
 					<div class="card-content black-text">
 						<span class="card-title"><h1>{{temperature}}<sup>&deg;</sup></h1></span>
-						<a class="btn-floating btn-fab btn-large" ng-class="{disabled:state.brightness==0}" style="background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">lightbulb_outline</i></a>
+						<a class="btn-floating btn-fab btn-large" ng-class="{disabled:state.brightness==0}" style="background-color:rgba({{state.r}},{{state.g}},{{state.b}},{{state.brightness*.75+.25}})"><i class="material-icons">{{auto && brightness != 0 && state.brightness == 0 ? "brightness_4":"lightbulb_outline"}}</i></a>
 					</div>
 
 
@@ -51,7 +51,7 @@
 				<p>
 				<label>
 					<input ng-change="setAuto()" ng-model="auto" type="checkbox">
-					<span><small>Auto</small></span>
+					<span><i class="material-icons small">brightness_4</i></span>
 				</label>
 				</p>
 			</div>

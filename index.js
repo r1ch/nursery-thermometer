@@ -5,7 +5,7 @@ const Interface = require('./express')
 const CloudWatch = require('./cloudwatch')
 
 const updateLighthouse = () => Lights.colour = Controller.temperatureToColour(Environment.temperature)
-const updateCloudWatch = () => CloudWatch.record(Environment)
+const updateCloudWatch = () => CloudWatch.record(Environment).catch(console.error)
 const updateBrightness = () => Lights.working = Controller.workingFor(Environment.light)
 
 Interface(Environment,Lights,Controller)
