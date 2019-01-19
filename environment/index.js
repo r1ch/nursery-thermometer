@@ -1,7 +1,8 @@
 const run=require('../run')
 const SCRIPT = "scripts/all.py";
 const EVERY = 1000;
-
+const FACTOR = 1.1;
+const pi = require('node-raspi');
 
 class Environment {
 
@@ -14,10 +15,11 @@ class Environment {
 
 	read(){
 		run(SCRIPT,{},(data)=>{
+			let parsed = JSON.parse(data[0])
 			this._reading = {
-				temperature : parseFloat(data[0])-1.2,
-				pressure : parseFloat(data[1]),
-				light: parseFloat(data[2])
+				temperature : calibrate(parsed.temperature),
+				pressure : parsed.pressure,
+				light: parsed.light
 			}
 		});
 	}
@@ -34,6 +36,10 @@ class Environment {
 		return this._reading.light
 	}
 
+}
+
+const calibrate = (temp)=>{
+	return temp - ((pi.getThrm() - temp) / FACTOR);
 }
 
 const instance = new Environment();
