@@ -1,5 +1,5 @@
-const run = require('../run');
-const SOLID = "scripts/solid_colour.py"
+const Shell = require('python-shell');
+const SCRIPT = "script.py"
 const EventEmitter = require('events')
 let instance = false;
 
@@ -9,9 +9,20 @@ class Lights extends EventEmitter {
 		this._triple = [128,128,128];
 		this._brightness =  0.5;
 		this.on('change',()=>{
-			run(SOLID,this.state);
+			this.update(this.state);
 		});
 		this._working = true;
+		this.shell = false;
+		this.start()
+	}
+
+	start(){
+		this.shell = new Shell(SCRIPT,{scriptPath: __dirname})
+		this.shell.on('stderr',error=>console.error)
+	}
+
+	update(){
+		this.shell.send(this.state)
 	}
 
 	set colour(triple){

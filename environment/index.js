@@ -1,27 +1,31 @@
-const run=require('../run')
-const SCRIPT = "scripts/all.py";
-const EVERY = 1000;
-const FACTOR = 1.1;
+const Shell = require('python-shell');
+const SCRIPT = "script.py";
+const FACTOR = 10;
 const pi = require('node-raspi');
 
 class Environment {
 
 	constructor(){
-		this._reading = null
+		this._reading = {}
 		this.ID = Date.now()+Math.random();
-		this.read();
-		this.interval = setInterval(()=>this.read(),EVERY)
+		this.shell = false;
+		this.start();
 	}
 
-	read(){
-		run(SCRIPT,{},(data)=>{
-			let parsed = JSON.parse(data[0])
+	start(){
+		console.log("Staring Env")
+		this.shell = new Shell(SCRIPT, {scriptPath: __dirname});
+		this.shell.on('message',(message)=>{
+			console.log("Message")
+			console.log(message)
+			const parsed =JSON.parse(message.replace(/'/g,'"'));
 			this._reading = {
 				temperature : calibrate(parsed.temperature),
 				pressure : parsed.pressure,
 				light: parsed.light
 			}
-		});
+		})
+	        this.shell.on('error',error=>console.error)
 	}
 
 	get reading(){
