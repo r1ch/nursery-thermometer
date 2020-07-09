@@ -18,7 +18,7 @@ class Lights extends EventEmitter {
 
 	start(){
 		this.shell = new Shell(SCRIPT,{scriptPath: __dirname})
-		this.shell.on('stderr',error=>console.error)
+		this.shell.on('error',error=>console.error)
 	}
 
 	update(){
