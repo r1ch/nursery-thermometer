@@ -9,7 +9,7 @@ const defaultColours = [
 
 const nightlightColours = [
 	{rgb:[255,40,0], from: 7},//red
-	{rgb:[10,255,40], from: 18},//green
+	{rgb:[10,255,40], from: 19},//green
 	{rgb:[255,40,0]}//red
 ]
 
