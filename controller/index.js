@@ -54,7 +54,7 @@ class Controller extends EventEmitter {
 	temperatureToColour(temperature){
 		let needle = this._mode == 'thermometer' ? temperature : (new Date()).getHours()
 		let haystack = this._colours[this._mode]; 
-		return haystack.find(item=>(!item.from || item.from < needle)).rgb
+		return haystack.find(item=>(!item.from || item.from > needle)).rgb
 	}
 
 	workingFor(light){
