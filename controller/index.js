@@ -2,13 +2,15 @@ const EventEmitter = require('events');
 const storage = require('node-persist');
 
 const defaultColours = [
-	{from:18, rgb:[0,0,255]},
-	{from:28, rgb:[0,255,0]},
+	{rgb:[0,0,255], from: 18},
+	{rgb:[0,255,0], from: 25},
 	{rgb:[255,0,0]}
 ]
 
 const nightlightColours = [
-	{rgb:[188,188,50]}
+	{rgb:[255,40,0], from: 7},//red
+	{rgb:[10,255,40], from: 18},//green
+	{rgb:[255,40,0]}//red
 ]
 
 const DARK = 300;
@@ -50,10 +52,9 @@ class Controller extends EventEmitter {
 	}
 
 	temperatureToColour(temperature){
-		for(var i = 0; i < this._colours[this._mode].length && this._colours[this._mode][i].from ; i++){
-			if(temperature<=this._colours[this._mode][i].from){return this._colours[this._mode][i].rgb}
-		}
-		return this._colours[this._mode][this._colours[this._mode].length-1].rgb;
+		let needle = this._mode == 'thermometer' ? temperature : (new Date()).getHours()
+		let haystack = this._colours[this._mode]; 
+		return haystack.find(item=>(!item.from || item.from < needle)).rgb
 	}
 
 	workingFor(light){
