@@ -9,7 +9,8 @@ const defaultColours = [
 
 const nightlightColours = [
 	{rgb:[255,40,0], from: 7},//red
-	{rgb:[10,255,40], from: 19},//green
+	{rgb:[10,255,40], from: 9},//green
+	{rgb:[252,237,184], from: 19},//ultrawarm
 	{rgb:[255,40,0]}//red
 ]
 
@@ -24,7 +25,7 @@ class Controller extends EventEmitter {
 			thermometer:defaultColours,
 			nightlight:nightlightColours
 		}
-		this._mode = 'thermometer'
+		this._mode = 'nightlight'
 		this._auto = false;
 		this._stored = false;
 		this.load();
