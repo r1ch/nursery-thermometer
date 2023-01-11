@@ -65,6 +65,10 @@ router.get('/state', function(req, res) {
     res.json(Lights.state);
 });
 
+router.get('/colourMap', function(req, res){
+	res.json(Controller.colourMap)
+})
+
 app.use('/api', router);
 
 app.listen(port);
