@@ -90,7 +90,7 @@ class Controller extends EventEmitter {
 	}
 	
 	get colourMap(){
-		return JSON.stringify(this._colours)
+		return this._colours
 	}
 
 	set colours(colours){
