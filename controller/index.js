@@ -88,6 +88,10 @@ class Controller extends EventEmitter {
 	get colours(){
 		return this._colours.thermometer
 	}
+	
+	get colourMap(){
+		return JSON.stringify(this._colours)
+	}
 
 	set colours(colours){
 		colours.map(colour=>colour.from=(colour.from?parseInt(colour.from):false))
