@@ -3,16 +3,31 @@ const storage = require('node-persist');
 
 const defaultColours = [
 	{rgb:[0,0,255], from: 18},
-	{rgb:[0,255,0], from: 25},
-	{rgb:[255,0,0]}
+	{rgb:[10,255,40], from: 25},//green
+	{rgb:[255,40,0]}// "red" - not pink
 ]
-
+//who the fuck wrote from, surely to? utterly to, not from
 const nightlightColours = [
-	{rgb:[255,40,0], from: 7},//red
-	{rgb:[10,255,40], from: 9},//green
+	{rgb:[255,40,0], from: 7.0},//red
+	{rgb:[10,255,40], from: 9.5},//green
 	{rgb:[252,237,184], from: 19},//ultrawarm
 	{rgb:[255,40,0]}//red
 ]
+
+//reWrite nightlight RED time - should be 0700 on Mon, Tues and  0715 other days
+
+const nightlightChanger = setInterval(()=>{
+	//Sunday:	0
+	//Monday:	1
+	//Tuesday:	2
+	//Wednesday:	3
+	//Thursday:	4
+	//Friday:	5
+	//Saturday:	6
+	let day = (new Date).getDay()
+	if([0,1,2,6].includes(day)) nightlightColours[0].from = 7.25
+	else nightlightColours[0].from = 7.0
+},1000*60*60)
 
 const DARK = 300;
 
@@ -53,8 +68,8 @@ class Controller extends EventEmitter {
 	}
 
 	temperatureToColour(temperature){
-		let needle = this._mode == 'thermometer' ? temperature : (new Date()).getHours()
-		let haystack = this._colours[this._mode]; 
+		let needle = this._mode == 'thermometer' ? temperature : (new Date()).getHours() + (new Date()).getMinutes()/60
+		let haystack = this._colours[this._mode];
 		return haystack.find(item=>(!item.from || item.from > needle)).rgb
 	}
 
@@ -72,6 +87,10 @@ class Controller extends EventEmitter {
 
 	get colours(){
 		return this._colours.thermometer
+	}
+	
+	get colourMap(){
+		return this._colours
 	}
 
 	set colours(colours){

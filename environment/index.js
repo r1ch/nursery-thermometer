@@ -16,8 +16,6 @@ class Environment {
 		console.log("Staring Env")
 		this.shell = new Shell(SCRIPT, {scriptPath: __dirname});
 		this.shell.on('message',(message)=>{
-			console.log("Message")
-			console.log(message)
 			const parsed =JSON.parse(message.replace(/'/g,'"'));
 			this._reading = {
 				temperature : calibrate(parsed.temperature),

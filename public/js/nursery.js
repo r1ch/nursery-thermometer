@@ -126,6 +126,17 @@ angular.module('nurseryApp', [])
 			$scope.error = error
 		})
 	}
+	
+	var getColourMap = ()=>{
+		$http.get('/api/colourMap')
+		.then(
+		(success)=>{
+			$scope.colourMap = success.data
+		},
+		(error)=>{
+			$scope.error = error
+		})
+	}
 
         var colourSlider = document.getElementById('colour');
 	var brightnessSlider = document.getElementById('brightness');
@@ -135,8 +146,10 @@ angular.module('nurseryApp', [])
 	startAuto();
 	getTemperature();
 	getState();
+	getColourMap();
 	$interval(getTemperature,2000);
-	$interval(getState,2000)
+	$interval(getState,2000);
+	$interval(getColourMap,2000);
 
   });
 
