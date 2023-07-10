@@ -1,8 +1,18 @@
 const express    = require('express');
+const https 	 = require('https');
+const fs 	 = require('fs');
 const app        = express();
 const bodyParser = require('body-parser');
 const port = 80
+const portSecure = 443
 
+
+let key = fs.readFileSync(__dirname + '/selfsigned.key');
+let cert = fs.readFileSync(__dirname + '/selfsigned.crt');
+let options = {
+  key: key,
+  cert: cert
+};
 
 let Environment
 let Lights
@@ -73,4 +83,10 @@ app.use('/api', router);
 
 app.listen(port);
 
+let server = https.createServer(options,app)
+
+server.listen(portSecure, ()=>{})
+
 module.exports = setup
+
+

@@ -3,8 +3,8 @@ const storage = require('node-persist');
 
 const defaultColours = [
 	{rgb:[0,0,255], from: 18},
-	{rgb:[0,255,0], from: 25},
-	{rgb:[255,0,0]}
+	{rgb:[10,255,40], from: 25},//green
+	{rgb:[255,40,0]}// "red" - not pink
 ]
 //who the fuck wrote from, surely to? utterly to, not from
 const nightlightColours = [
@@ -14,7 +14,7 @@ const nightlightColours = [
 	{rgb:[255,40,0]}//red
 ]
 
-//reWrite nightlight RED time - should be 0700 on Mon, Tues and  0730 other days
+//reWrite nightlight RED time - should be 0700 on Mon, Tues and  0715 other days
 
 const nightlightChanger = setInterval(()=>{
 	//Sunday:	0
