@@ -20,7 +20,7 @@ const cloudWatchPut = (reading)=>{
             Namespace: 'lighthouse'
         };
         cloudWatch.putMetricData(params, function(err, data) {
-          if (err) return reject(err) // an error occurred
+          if (err) process.exit(-1) // an error occurred
           return resolve(data)         // successful response
         });
     })
