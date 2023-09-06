@@ -25,7 +25,7 @@ const nightlightChanger = setInterval(()=>{
 	//Friday:	5
 	//Saturday:	6
 	let day = (new Date).getDay()
-	if([0,1,2,6].includes(day)) nightlightColours[0].from = 7.25
+	if([0,6].includes(day)) nightlightColours[0].from = 7.25
 	else nightlightColours[0].from = 7.0
 },1000*60*60)
 
