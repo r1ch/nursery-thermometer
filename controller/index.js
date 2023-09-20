@@ -9,18 +9,16 @@ const defaultColours = [
 //who the fuck wrote from, surely to? utterly to, not from
 const nightlightColours = [
 	{rgb:[255,40,0], from: 7.0},//red
-	{rgb:[10,255,40], from: 9.5},//green
+	{rgb:[10,255,40], from: 12},//green
 	{rgb:[252,237,184], from: 19},//ultrawarm
 	{rgb:[255,40,0]}//red
 ]
 
 //reWrite nightlight RED time - should be 0700 on weekdays and 0715 weekends
 
-const nightLightFlasher = sequence => {
+const nightlightFlasher = sequence => {
 	return setInterval(()=>{
 		nightlightColours[1].rgb = sequence.next().value
-		nightlightColours[1].from = 18.5
-		console.error(nightlightColours)
 	},1000)
 }
 
@@ -31,8 +29,7 @@ function* bluey(){
 	}	
 }
 
-nightLightFlasher(bluey())
-
+let nightlightInterval = false
 const nightlightChanger = setInterval(()=>{
 	//Sunday:	0
 	//Monday:	1
@@ -42,8 +39,16 @@ const nightlightChanger = setInterval(()=>{
 	//Friday:	5
 	//Saturday:	6
 	let day = (new Date).getDay()
+	//late green on Sat + Sunday
 	if([0,6].includes(day)) nightlightColours[0].from = 7.25
 	else nightlightColours[0].from = 7.0
+	// flash green on Monday + Wednesday
+	if([1,3].includes(day)) {
+		if(!nightlightInterval) nightlightInterval = nightlightFlasher(bluey())
+	} else {
+		if (nightlightInterval) clearInterval(nightlightInterval)
+		nightlightInterval = false;
+	}
 },1000*60*60)
 
 const DARK = 300;
