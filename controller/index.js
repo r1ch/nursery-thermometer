@@ -16,17 +16,22 @@ const nightlightColours = [
 
 //reWrite nightlight RED time - should be 0700 on weekdays and 0715 weekends
 
-const nightLightFlasher = () => {
-	let blue = false
+const nightLightFlasher = sequence => {
 	return setInterval(()=>{
-		nightlightColours[1].rgb = blue ? [10,255,40] : [0,0,255]
+		nightlightColours[1].rgb = sequence.next().value
 		nightlightColours[1].from = 18.5
-		blue != blue
 		console.error(blue,nightlightColours)
 	},2000)
 }
 
-nightLightFlasher()
+function* bluey{
+	while(true){
+		yield [10,255,40]
+		yield [0,0,255]
+	}	
+}
+
+nightLightFlasher(bluey())
 
 const nightlightChanger = setInterval(()=>{
 	//Sunday:	0
