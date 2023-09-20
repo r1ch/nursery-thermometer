@@ -21,7 +21,7 @@ const nightLightFlasher = sequence => {
 		nightlightColours[1].rgb = sequence.next().value
 		nightlightColours[1].from = 18.5
 		console.error(nightlightColours)
-	},2000)
+	},1000)
 }
 
 function* bluey(){
