@@ -24,7 +24,7 @@ const nightLightFlasher = sequence => {
 	},2000)
 }
 
-function* bluey{
+function* bluey(){
 	while(true){
 		yield [10,255,40]
 		yield [0,0,255]
