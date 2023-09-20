@@ -9,7 +9,7 @@ const defaultColours = [
 //who the fuck wrote from, surely to? utterly to, not from
 const nightlightColours = [
 	{rgb:[255,40,0], from: 7.0},//red
-	{rgb:[10,255,40], from: 12},//green
+	{rgb:[10,255,40], from: 9.5},//green
 	{rgb:[252,237,184], from: 19},//ultrawarm
 	{rgb:[255,40,0]}//red
 ]
@@ -49,7 +49,7 @@ const nightlightChanger = setInterval(()=>{
 		if (nightlightInterval) clearInterval(nightlightInterval)
 		nightlightInterval = false;
 	}
-},1000*60)
+},1000*60*60)
 
 const DARK = 300;
 
