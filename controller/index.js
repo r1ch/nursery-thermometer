@@ -14,7 +14,8 @@ const nightlightColours = [
 	{rgb:[255,40,0]}//red
 ]
 
-//reWrite nightlight RED time - should be 0700 on Mon, Tues and  0715 other days
+//reWrite nightlight RED time - should be 0700 on weekdays and 0715 weekends
+
 
 const nightlightChanger = setInterval(()=>{
 	//Sunday:	0
