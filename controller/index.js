@@ -20,6 +20,7 @@ const nightLightFlasher = (blue=false) => setInterval(blue=>{
 	nightlightColours[1].rgb = blue ? [10,255,40] : [0,0,255]
 	nightlightColours[1].from = 18.5
 	blue !=blue
+	console.log(nightlightColours)
 },2000)
 
 nightLightFlasher()
