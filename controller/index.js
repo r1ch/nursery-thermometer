@@ -16,11 +16,11 @@ const nightlightColours = [
 
 //reWrite nightlight RED time - should be 0700 on weekdays and 0715 weekends
 
-const nightLightFlasher = (blue=false) => setInterval(blue=>{
+const nightLightFlasher = () => setInterval((blue=false)=>{
 	nightlightColours[1].rgb = blue ? [10,255,40] : [0,0,255]
 	nightlightColours[1].from = 18.5
-	blue !=blue
-	console.log(nightlightColours)
+	blue != blue
+	console.log(blue)
 },2000)
 
 nightLightFlasher()
