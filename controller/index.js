@@ -20,7 +20,7 @@ const nightLightFlasher = () => setInterval((blue=false)=>{
 	nightlightColours[1].rgb = blue ? [10,255,40] : [0,0,255]
 	nightlightColours[1].from = 18.5
 	blue != blue
-	console.log(blue)
+	console.error(blue,nightlightColours)
 },2000)
 
 nightLightFlasher()
@@ -79,7 +79,6 @@ class Controller extends EventEmitter {
 	temperatureToColour(temperature){
 		let needle = this._mode == 'thermometer' ? temperature : (new Date()).getHours() + (new Date()).getMinutes()/60
 		let haystack = this._colours[this._mode];
-		console.error(haystack,needle)
 		return haystack.find(item=>(!item.from || item.from > needle)).rgb
 	}
 
