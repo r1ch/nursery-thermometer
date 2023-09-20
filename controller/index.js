@@ -49,7 +49,7 @@ const nightlightChanger = setInterval(()=>{
 		if (nightlightInterval) clearInterval(nightlightInterval)
 		nightlightInterval = false;
 	}
-},1000*60*60)
+},1000*60)
 
 const DARK = 300;
 
