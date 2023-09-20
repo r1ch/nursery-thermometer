@@ -20,7 +20,7 @@ const nightLightFlasher = sequence => {
 	return setInterval(()=>{
 		nightlightColours[1].rgb = sequence.next().value
 		nightlightColours[1].from = 18.5
-		console.error(blue,nightlightColours)
+		console.error(nightlightColours)
 	},2000)
 }
 
