@@ -23,7 +23,7 @@ const nightLightFlasher = () => {
 		nightlightColours[1].from = 18.5
 		blue != blue
 		console.error(blue,nightlightColours)
-	}},2000)
+	},2000)
 }
 
 nightLightFlasher()
