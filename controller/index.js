@@ -22,6 +22,12 @@ const nightlightFlasher = sequence => {
 	},1000)
 }
 
+const stopFlasher = () =>{
+	if (nightlightInterval) clearInterval(nightlightInterval)
+	nightlightInterval = false;
+	nightlightColours[1].rgb = [10,255,40]
+}
+
 function* bluey(){
 	while(true){
 		yield [10,255,40]
@@ -39,19 +45,16 @@ const nightlightChanger = setInterval(()=>{
 	//Friday:	5
 	//Saturday:	6
 	let day = (new Date).getDay()
-	//late green on Sat + Sunday
 	if([0,6].includes(day)){
-		if (nightlightInterval) clearInterval(nightlightInterval)
-		nightlightInterval = false;
-		nightlightColours[0].rgb = [10,255,40]
+		stopFlasher()
+		//late green on Sat + Sunday
 		nightlightColours[0].from = 7.25
 	} else if([1,3].includes(day)) {
+		//normal time green on Mon + Weds, but..
 		nightlightColours[0].from = 7.0
 		if(!nightlightInterval) nightlightInterval = nightlightFlasher(bluey())
 	} else {
-		if (nightlightInterval) clearInterval(nightlightInterval)
-		nightlightInterval = false;
-		nightlightColours[0].rgb = [10,255,40]
+		stopFlasher()
 		nightlightColours[0].from = 7.0
 	}
 },1000*60*60)
