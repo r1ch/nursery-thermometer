@@ -148,8 +148,8 @@ angular.module('nurseryApp', [])
 	getState();
 	getColourMap();
 	$interval(getTemperature,2000);
-	$interval(getState,2000);
-	$interval(getColourMap,2000);
+	$interval(getState,1000);
+	$interval(getColourMap,1000);
 
   });
 
