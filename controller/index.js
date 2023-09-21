@@ -40,14 +40,19 @@ const nightlightChanger = setInterval(()=>{
 	//Saturday:	6
 	let day = (new Date).getDay()
 	//late green on Sat + Sunday
-	if([0,6].includes(day)) nightlightColours[0].from = 7.25
-	else nightlightColours[0].from = 7.0
-	// flash green on Monday + Wednesday
-	if([1,3].includes(day)) {
+	if([0,6].includes(day)){
+		if (nightlightInterval) clearInterval(nightlightInterval)
+		nightlightInterval = false;
+		nightlightColours[0].rgb = [10,255,40]
+		nightlightColours[0].from = 7.25
+	} else if([1,3].includes(day)) {
+		nightlightColours[0].from = 7.0
 		if(!nightlightInterval) nightlightInterval = nightlightFlasher(bluey())
 	} else {
 		if (nightlightInterval) clearInterval(nightlightInterval)
 		nightlightInterval = false;
+		nightlightColours[0].rgb = [10,255,40]
+		nightlightColours[0].from = 7.0
 	}
 },1000*60*60)
 
